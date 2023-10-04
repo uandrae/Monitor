@@ -11,15 +11,17 @@ SCR=$BASE/scr
 WRK=$BASE/wrk
 
 # Experiment names and paths,should be space separated
-DBASE=$BASE/data/
-EXP="trunk_ver"
-DISPLAY_EXP="$EXP"
+CERRA_TU_WEBGRAF_BASE=$SCRATCH/CERRA_TU_MONITOR/
+mkdir -p $CERRA_TU_WEBGRAF_BASE
+DBASE=/scratch/snh/monitor_data/@YYYY@/@MM@/
+EXP="cerra_nrt"
+DISPLAY_EXP="cerra_tu"
 OBSPATH=$DBASE
 P1=$DBASE/
 MODPATH="$P1"
 
 # Project name, will be the name on the web page
-PROJECT=monitor_example
+PROJECT=cerra_tu
 
 # Explanation on webpage
 HELP="Observation verification comparison"
@@ -36,11 +38,11 @@ HELP="Observation verification comparison"
 # IDATE is the very first date for PERIOD_TYPE=2 it determines the 
 # length of the date menu in WebgraF
 #
-PERIOD_TYPE=1
+PERIOD_TYPE=2
 PERIOD_FREQ=1
 
-SDATE=20171001
-EDATE=20171010
+SDATE=20181229
+EDATE=20181231
 IDATE=$SDATE
 
 #
@@ -99,6 +101,7 @@ STNLIST_PLOT_TXT=-1
 
 # Active parameters
 SURFPAR="PS FF GX DD TT TTHA TN TX TD TDD RH QQ NN PE1 PE3 PE6 PE12 VI"
+SURFPAR="PS"
 
 # Things to plot:
 # GEN    : General forcast length statistics
@@ -152,7 +155,7 @@ SURFSELECTION="ALL"
 OBINT_SURF=01
 
 # Assimilation cycle interval
-FCINT_SURF=06
+FCINT_SURF=12
 
 # List of initial times, use ALL or specific times
 SURFINI_HOURS="ALL"
@@ -161,7 +164,7 @@ SURFINI_HOURS="ALL"
 FCLEN_SURF_READ="00 01 02 03 04 05 06 07 08 09 \
                  10 11 12 13 14 15 16 17 18 19 \
                  20 21 22 23 24 25 26 27 28 29 \
-                 30 31 32 33 34 35 36"
+                 30"
 
 # Use analysis at +00h, set per experiment
 USE_ANALYSIS=".TRUE.,.TRUE.,.TRUE.,.TRUE.,.TRUE."
@@ -211,13 +214,13 @@ FCINT_TEMP=12
 TEMPINI_HOURS="ALL 00 12"
 
 # Forecast lengths used for verification
-FCLEN_TEMP="00 06 12 18 24 36 48"
+FCLEN_TEMP="00 06 12 18 24 30"
 
 # Forecast lengths used for vertical profiles
-FCLEN_TEMP_VERT="06 12 18 24 36 48"
+FCLEN_TEMP_VERT="06 12 18 24 30"
 
 # Forecast lengths used in timeserie plots
-FCLEN_TEMP_TIME="24"
+FCLEN_TEMP_TIME="12 24"
 
 # TEMP levels to be verified
 LEV_LST="925 850 700 500 300 200 150 100 50"
@@ -249,7 +252,10 @@ PAR_PER_BLOCK=$(( $( echo $SURFPAR | wc | awk '{print $2}' ) / 2 + 1 ))
 
 # WebgraF call, set WEBCALL empty if not used
 WEBGRAF_BASE=$BASE/WebgraF
-WEBCALL="$BASE/WebgraF/bin/WebgraF -p $PROJECT"
+[[ -s $CERRA_TU_WEBGRAF_BASE/webgraf.js ]] || $WEBGRAF_BASE/bin/WebgraF -b $CERRA_TU_WEBGRAF_BASE -I "CERRA TU verification portal"
+
+WEBCALL="$BASE/WebgraF/bin/WebgraF -b $CERRA_TU_WEBGRAF_BASE -p $PROJECT"
+
 
 # Export all variables
 export PROJECT WEBCALL WEBGRAF_BASE BASE BIN IDATE SDATE EDATE HELP SCR WRK
@@ -265,6 +271,7 @@ export SCORELIST SCORETYPES
 export SURFINI_HOURS TEMPINI_HOURS PAR_PER_BLOCK
 export EXP DISPLAY_EXP USE_ANALYSIS
 export SIGN_TEST_JOINT
+export MONITOR_DEBUG=1
 
 ###########################
 # End of definitions

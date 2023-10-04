@@ -173,6 +173,9 @@ if ( exists $selectionloop{'VERT'}{'SHOW_TIMES'} ) {
  $prof_hours = '\'ALL\'';
 }; 
 
+$xml_add = "Temp_prof/[1]/[0]_[1]_[2]_[3]_[7]_[4]_[5]_[6].$EXT";
+$xml_new = $xml ;
+$xml_new =~ s/All/$xml_add/ig;
 
 open INPUT, "> input.js" ;
 print INPUT "
@@ -209,7 +212,7 @@ help = '$ENV{HELP}'; hide_help = false ;
 do_send = true ;
 do_show_remember = true ;
 do_remember = true ;
-$xml
+$xml_new
 $xml_txt
 
 " ;
@@ -277,6 +280,10 @@ sub map {
     $map_hour_title ='\'Hour\'' ;
  } ;
 
+$xml_add = "$type/[1]/[0]_[8]_[1]_[2]_[3]_[9]_[7]_[6]_[4]_[5].$EXT";
+$xml_new = $xml ;
+$xml_new =~ s/All/$xml_add/ig;
+
  open INPUT, "> input.js" ;
  print INPUT "
 // Input file
@@ -319,7 +326,7 @@ do_send = true ;
 do_show_remember = true ;
 do_remember = true ;
 $xml_txt
-$xml
+$xml_new
 
 " ;
 close INPUT ;
@@ -407,6 +414,10 @@ sub gen_stat {
 # Gen statistics definition file
 #
 
+$xml_add = "$type/[1]/[0]_[1]_[2]_[3]_[6]_[4]_[5].$EXT";
+$xml_new = $xml ;
+$xml_new =~ s/All/$xml_add/ig;
+
 open INPUT, "> input.js" ;
 print INPUT "
 
@@ -442,7 +453,7 @@ do_send = true ;
 do_show_remember = true ;
 do_remember = true ;
 $xml_txt
-$xml
+$xml_new
 ";
 
 
@@ -460,6 +471,9 @@ sub scatter {
 #
 # Scatter definition file
 #
+$xml_add = "$type/[1]/[0]_[1]_[2]_[3]_[7]_[6]_[4]_[5].$EXT";
+$xml_new = $xml ;
+$xml_new =~ s/All/$xml_add/ig;
 
 open INPUT, "> input.js" ;
 
@@ -498,7 +512,7 @@ do_send = true ;
 do_show_remember = true ;
 do_remember = true ;
 $xml_txt
-$xml
+$xml_new
 " ;
 
 close INPUT ;
@@ -523,6 +537,9 @@ sub sign {
  } ;
 
 $sexpname ='\''.join('\',\'',@tmp).'\'';
+$xml_add = "$type/[1]/[0]_[1]_[2]_[3]_[7]_[6]_[4]_[5].$EXT";
+$xml_new = $xml ;
+$xml_new =~ s/All/$xml_add/ig;
 
 open INPUT, "> input.js" ;
 
@@ -561,7 +578,7 @@ do_send = true ;
 do_show_remember = true ;
 do_remember = true ;
 $xml_txt
-$xml
+$xml_new
 " ;
 
 close INPUT ;
@@ -578,6 +595,10 @@ sub jsign {
 #
 # Significance test definition file
 #
+
+$xml_add = "$type/[1]/[0]_[1]_[2]_[3]_[6]_[4]_[5].$EXT";
+$xml_new = $xml ;
+$xml_new =~ s/All/$xml_add/ig;
 
 open INPUT, "> input.js" ;
 
@@ -614,7 +635,7 @@ do_send = true ;
 do_show_remember = true ;
 do_remember = true ;
 $xml_txt
-$xml
+$xml_new
 " ;
 
 close INPUT ;
@@ -685,12 +706,12 @@ sub finalize_plot {
  # Build xml text
 
  if ( exists $plots{'XML'} ) { 
-   @xml  = (@xml,"$pdir/[4]_[1].xml");
+   @xml  = (@xml,"$pdir/[1]/[4]_[1].xml");
    @xml_txt = ('Stations');
  } ;
 
  if ( exists $plots{'GEN'} ) {
-    @xml     = ("$pdir/TABLE_LL_[1]_[3].html",@xml);
+    @xml     = ("$pdir/[1]/TABLE_LL_[1]_[3].html",@xml);
     @xml_txt = ("Stat".$_,@xml_txt);
  };
  if ( exists $plots{'SEAS'} ) {
@@ -698,11 +719,11 @@ sub finalize_plot {
     @xml_txt = ("Seasonal".$_,@xml_txt);
  };
 
-@xml     = ("$pdir/quality_[1].html",@xml) ;
+@xml     = ("$pdir/[1]/quality_[1].html",@xml) ;
 @xml_txt = ("Quality control",@xml_txt);
 
 if ( exists $plots{'CONT'} ) {
-    @xml_cont     = (@xml,"$pdir/c_[1]_00000000_[3]_[7]_[4]_0.html");
+    @xml_cont     = (@xml,"$pdir/[1]/c_[1]_00000000_[3]_[7]_[4]_0.html");
     @xml_cont_txt = (@xml_txt,"Cont");
 };
 

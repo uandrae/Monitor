@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -a
+set -x
 
 #
 # Run verobs for surface or temp variables
@@ -110,8 +111,10 @@ ls c_*.html 1>/dev/null 2>/dev/null && {
 if [ -s fort.48 ] ; then
  if [ $PERIOD_TYPE -eq 1 ] ; then
   TSTAMP=00000000
+  QUIRK=""
  else
   TSTAMP=00${SDATE:0:6}
+  QUIRK=$TSTAMP
  fi
  QFILE=quality_${TSTAMP}.html
  echo '<pre>'   > $QFILE
@@ -147,7 +150,7 @@ if [ `echo $TEMPPLOT | grep -c VERT` -gt 0 -a $DIR = "TEMP" ] ; then
          convert -resize 100% -rotate 90 -flatten $FF.ps $FF.png 
       done
    fi 
-   $WEBCALL -e ${ENTRY}_prof -fm $PWD/
+   $WEBCALL -e ${ENTRY}_prof -fm $PWD/ -q $QUIRK
    cd -
    rmdir vert
 
@@ -167,7 +170,7 @@ if [ $OUTPUT_TYPE -eq 1 ] ; then
 fi
 
 # Send data to WebgraF and create interface
-$WEBCALL -e $ENTRY -fm $PWD/
+$WEBCALL -e $ENTRY -fm $PWD/ -q $QUIRK
 cd $SCR
 ./Create_ver_js.pl $DIR
 

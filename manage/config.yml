@@ -1,0 +1,7 @@
+global:
+  history: "history.json"
+  ecfs_path: "ec:/smoz/harmonie"
+  data_path: "/scratch/user/monitor_data"
+
+experiments:
+        - cerra_nrt

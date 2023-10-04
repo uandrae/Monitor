@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 set -ax
 
 if [ $# -ge 1 ] ; then
@@ -13,6 +14,8 @@ fi
 [[ -s $ENV_EXP ]] || { echo "Please give an existing Env_exp file" ; exit 1 ; }
 
 . $ENV_EXP  || { echo "Could not source $ENV_EXP" ; exit 1 ; }
+
+export PERL5LIB=$SCR
 
 [[ $WEBCALL == "" ]] && exit
 
