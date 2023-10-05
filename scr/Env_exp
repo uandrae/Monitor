@@ -11,17 +11,17 @@ SCR=$BASE/scr
 WRK=$BASE/wrk
 
 # Experiment names and paths,should be space separated
-CERRA_TU_WEBGRAF_BASE=$SCRATCH/CERRA_TU_MONITOR/
+CERRA_TU_WEBGRAF_BASE=${CERRA_TU_WEBGRAF_BASE-/scratch/snh/CERRA_TU_MONITOR}
 mkdir -p $CERRA_TU_WEBGRAF_BASE
 DBASE=/scratch/snh/monitor_data/@YYYY@/@MM@/
-EXP="cerra_nrt"
+EXP=${EXP-cerra_nrt}
 DISPLAY_EXP="cerra_tu"
 OBSPATH=$DBASE
 P1=$DBASE/
 MODPATH="$P1"
 
 # Project name, will be the name on the web page
-PROJECT=cerra_tu
+PROJECT=${PROJECT-cerra_tu}
 
 # Explanation on webpage
 HELP="Observation verification comparison"
@@ -41,8 +41,8 @@ HELP="Observation verification comparison"
 PERIOD_TYPE=2
 PERIOD_FREQ=1
 
-SDATE=20181229
-EDATE=20181231
+SDATE=${SDATE-20181229}
+EDATE=${EDATE-20181231}
 IDATE=$SDATE
 
 #
@@ -202,6 +202,7 @@ FCLEN_MAP=$FCLEN_SURF_READ
 #
 
 TEMPPAR="TT TD FF DD FI RH QQ"
+TEMPPAR="TT"
 
 TEMPPLOT="GEN TIME VERT"
 

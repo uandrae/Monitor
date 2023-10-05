@@ -69,6 +69,7 @@ $n = 0 ;
 while ( <@ARGV> ) {
 
    if ( /^-h/) { die $usage ; } ;
+   if ( /^-q/) { $QUIRK = $ARGV[($n + 1)] ; } ;
    if ( /^-p/) { $PROJECT = $ARGV[($n + 1)] ; $PROJECT = " $PROJECT " ; } ;
    if ( /^-e/) { $ENTRY   = $ARGV[($n + 1)] ; $ENTRY   = " $ENTRY "   ; } ;
    if ( /^-u/) { $WEBUSER = $ARGV[($n + 1)] ; $ADDUSER = "true"       ; } ;
@@ -654,9 +655,10 @@ $BASENTRY=$BASE . "/" . $PROJECT ."/" . $ENTRY ;
 $BASENTRY =~ s/ //g ;
 
 print "$BASENTRY \n" ;
+system("mkdir -p $BASENTRY/$QUIRK");
 if ( -s "$FILE" ) { 
 	if ( -d "$FILE" ) { 
-		print "Copy directory $FILE "; system ("$COPY_DIR_BY $FILE/* $BASENTRY/.") 
+		print "Copy directory $FILE "; system ("$COPY_DIR_BY $FILE/* $BASENTRY/$QUIRK/.") 
 	} elsif ( $FILE =~m/\.html/) {
 		print "Copy $FILE \n"; system ("cp $FILE $BASENTRY/info.html") 
 	} elsif ( $FILE =~m/\.png/) {

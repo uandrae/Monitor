@@ -2,6 +2,10 @@ global:
   history: "history.json"
   ecfs_path: "ec:/smoz/harmonie"
   data_path: "/scratch/user/monitor_data"
+  webgraf_path: "/scratch/user/CERRA_TU_MONITOR"
+  monitor_path: "/hpcperm/snh/CERRA_TU/git/Monitor/scr"
+  project: "cerra_tu"
+  clean_old_exp: false
 
 experiments:
         - cerra_nrt

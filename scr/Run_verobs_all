@@ -17,7 +17,9 @@ echo "Output goes to $LOGFILE"
 echo
 set -x
 
-./Clean_ver_js       $ENV_EXP      >  $LOGFILE 2>&1 || exit
+if [ ${CLEAN_OLD_EXP-no} == "yes" ] ; then
+  ./Clean_ver_js       $ENV_EXP      >  $LOGFILE 2>&1 || exit
+fi
 ./Run_verobs         $ENV_EXP SURF >> $LOGFILE 2>&1 || exit
 ./Run_verobs         $ENV_EXP TEMP >> $LOGFILE 2>&1 || exit
 
