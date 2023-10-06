@@ -12,6 +12,8 @@ fi
 
 LOGFILE=$( echo $( basename $ENV_EXP ) | sed "s/Env_exp_//" ).log
 
+rm -f $LOGFILE
+
 echo
 echo "Output goes to $LOGFILE"
 echo
@@ -24,7 +26,7 @@ fi
 ./Run_verobs         $ENV_EXP TEMP >> $LOGFILE 2>&1 || exit
 
 ./Link2file          $ENV_EXP || exit
-./Transport_ver      $ENV_EXP || exit
+./Transport_ver      $ENV_EXP -t || exit
 
 set +x
 

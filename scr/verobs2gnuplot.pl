@@ -147,6 +147,7 @@ SCAN_INPUT: foreach $input_file (@FILES) {
         if ( $_ =~ /#HEADING/ ) {
             $heading = substr( $_, 11 );
             if ( $OUTPUT_TYPE eq 1 ) { $heading =~ s/_/ /g; } ;
+            if ( $OUTPUT_TYPE eq 2 ) { $heading =~ s/_/ /g; } ;
             @heading = (@heading,$heading);
             next SCAN_FILE;
         }
@@ -199,6 +200,7 @@ SCAN_INPUT: foreach $input_file (@FILES) {
 
             $legend = substr( $_, 11 ) ;
             if ( $OUTPUT_TYPE eq 1 ) { $legend =~ s/_/\\_/g; } ;
+            if ( $OUTPUT_TYPE eq 2 ) { $legend =~ s/_/\\_/g; } ;
 
             @col_def = (@col_def,
                        { LEGEND => $legend ,

@@ -4,18 +4,19 @@
 
 # Path to binaries, scripts and WebgraF page
 BASE=$( dirname $PWD )
+MONITOR_PATH=${MONITOR_PATH-$BASE}
 
 # Definition of BIN,SCR and WRK directory
-BIN=$BASE/bin
-SCR=$BASE/scr
-WRK=$BASE/wrk
+BIN=${BIN-$BASE/bin}
+SCR=${SCR-$BASE/scr}
+WRK=${WRK-BASE/wrk}
 
 # Experiment names and paths,should be space separated
 CERRA_TU_WEBGRAF_BASE=${CERRA_TU_WEBGRAF_BASE-/scratch/snh/CERRA_TU_MONITOR}
 mkdir -p $CERRA_TU_WEBGRAF_BASE
 DBASE=/scratch/snh/monitor_data/@YYYY@/@MM@/
 EXP=${EXP-cerra_nrt}
-DISPLAY_EXP="cerra_tu"
+DISPLAY_EXP=${DISPLAY_EXP-cerra_tu}
 OBSPATH=$DBASE
 P1=$DBASE/
 MODPATH="$P1"
@@ -43,7 +44,7 @@ PERIOD_FREQ=1
 
 SDATE=${SDATE-20181229}
 EDATE=${EDATE-20181231}
-IDATE=$SDATE
+IDATE=${IDATE-20181229}
 
 #
 # Single stations can be defined with comma separated
@@ -252,10 +253,10 @@ PAR_PER_BLOCK=$(( $( echo $SURFPAR | wc | awk '{print $2}' ) / 2 + 1 ))
 
 
 # WebgraF call, set WEBCALL empty if not used
-WEBGRAF_BASE=$BASE/WebgraF
+WEBGRAF_BASE=$MONITOR_PATH/WebgraF
 [[ -s $CERRA_TU_WEBGRAF_BASE/webgraf.js ]] || $WEBGRAF_BASE/bin/WebgraF -b $CERRA_TU_WEBGRAF_BASE -I "CERRA TU verification portal"
 
-WEBCALL="$BASE/WebgraF/bin/WebgraF -b $CERRA_TU_WEBGRAF_BASE -p $PROJECT"
+WEBCALL="$MONITOR_PATH/WebgraF/bin/WebgraF -b $CERRA_TU_WEBGRAF_BASE -p $PROJECT"
 
 
 # Export all variables
