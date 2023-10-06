@@ -102,7 +102,6 @@ STNLIST_PLOT_TXT=-1
 
 # Active parameters
 SURFPAR="PS FF GX DD TT TTHA TN TX TD TDD RH QQ NN PE1 PE3 PE6 PE12 VI"
-SURFPAR="PS"
 
 # Things to plot:
 # GEN    : General forcast length statistics
@@ -203,7 +202,6 @@ FCLEN_MAP=$FCLEN_SURF_READ
 #
 
 TEMPPAR="TT TD FF DD FI RH QQ"
-TEMPPAR="TT"
 
 TEMPPLOT="GEN TIME VERT"
 
