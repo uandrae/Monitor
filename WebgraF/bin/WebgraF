@@ -64,6 +64,7 @@ my $BASE    = $WEBGRAF_BASE  ;
 my $TRANSPORT  = "false" ;
 my $COPY_DIR_BY  = "cp -r" ;
 my $PRINT_ACTIVE_BASE="false";
+my $QUIRK="" ;
 
 $n = 0 ;
 while ( <@ARGV> ) {
