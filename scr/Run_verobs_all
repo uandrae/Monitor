@@ -12,21 +12,17 @@ fi
 
 LOGFILE=$( echo $( basename $ENV_EXP ) | sed "s/Env_exp_//" ).log
 
-rm -f $LOGFILE
-
 echo
 echo "Output goes to $LOGFILE"
 echo
 set -x
 
-if [ ${CLEAN_OLD_EXP-no} == "yes" ] ; then
-  ./Clean_ver_js       $ENV_EXP      >  $LOGFILE 2>&1 || exit
-fi
+./Clean_ver_js       $ENV_EXP      >  $LOGFILE 2>&1 || exit
 ./Run_verobs         $ENV_EXP SURF >> $LOGFILE 2>&1 || exit
 ./Run_verobs         $ENV_EXP TEMP >> $LOGFILE 2>&1 || exit
 
 ./Link2file          $ENV_EXP || exit
-./Transport_ver      $ENV_EXP -t || exit
+./Transport_ver      $ENV_EXP || exit
 
 set +x
 

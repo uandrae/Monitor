@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -a
+
+if [ $# -eq 1 ] ; then
+   ENV_EXP=$1
+else
+   echo "Please give an Env_exp file"
+   exit 1
+fi
+[[ -s $ENV_EXP ]] || { echo "Please give an existing Env_exp file" ; exit 1 ; }
+
+set -x
+
+if [ ${CLEAN_OLD_EXP-no} == "yes" ] ; then
+  ./Clean_ver_js       $ENV_EXP || exit
+fi
+./Run_verobs         $ENV_EXP SURF || exit
+./Run_verobs         $ENV_EXP TEMP || exit
